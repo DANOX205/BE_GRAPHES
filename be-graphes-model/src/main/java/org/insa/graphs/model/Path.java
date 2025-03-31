@@ -184,9 +184,23 @@ public class Path {
      * </ul>
      *
      * @return true if the path is valid, false otherwise.
-     * @deprecated Need to be implemented.
+     * Need to be implemented.
      */
     public boolean isValid() {
+        boolean Test_ARC = true;
+        if (isEmpty()){
+            return true;
+        } else if (size()==1) {
+            return true;
+        }
+        for (int i=0;i<size()-1;i++){
+            if (getOrigin()!= (getArcs().get(i).getOrigin()) || ((getArcs().get(i).getDestination()!= getArcs().get(i+1).getOrigin()))){
+                Test_ARC=false;
+            }
+        }
+        if (Test_ARC){
+            return true;
+        }
         // TODO:
         return false;
     }
@@ -195,11 +209,11 @@ public class Path {
      * Compute the length of this path (in meters).
      *
      * @return Total length of the path (in meters).
-     * @deprecated Need to be implemented.
+     * Need to be implemented.
      */
     public float getLength() {
         // TODO:
-        return 0;
+        return (float)getOrigin().getPoint().distanceTo(getDestination().getPoint());
     }
 
     /**
@@ -208,11 +222,11 @@ public class Path {
      * @param speed Speed to compute the travel time.
      * @return Time (in seconds) required to travel this path at the given speed (in
      *         kilometers-per-hour).
-     * @deprecated Need to be implemented.
+     * Need to be implemented.
      */
     public double getTravelTime(double speed) {
         // TODO:
-        return 0;
+        return getLength() * 3600.0 / (speed * 1000.0);
     }
 
     /**
@@ -220,11 +234,15 @@ public class Path {
      * every arc.
      *
      * @return Minimum travel time to travel this path (in seconds).
-     * @deprecated Need to be implemented.
+     * Need to be implemented.
      */
     public double getMinimumTravelTime() {
         // TODO:
-        return 0;
+        double result= 0;
+        for (int i=0;i<size();i++){
+            result = result + getTravelTime(getArcs().get(i).getRoadInformation().getMaximumSpeed());;
+        }
+        return result;
     }
 
 }
