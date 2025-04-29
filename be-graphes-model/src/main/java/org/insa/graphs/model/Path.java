@@ -187,22 +187,22 @@ public class Path {
      * Need to be implemented.
      */
     public boolean isValid() {
-        boolean Test_ARC = true;
-        if (isEmpty()){
+        if (this.isEmpty()){
             return true;
-        } else if (size()==1) {
+        } else if (this.size()==1) {
             return true;
         }
-        for (int i=0;i<size()-1;i++){
-            if (getOrigin()!= (getArcs().get(i).getOrigin()) || ((getArcs().get(i).getDestination()!= getArcs().get(i+1).getOrigin()))){
-                Test_ARC=false;
+        if (!(this.getOrigin().equals(this.getArcs().get(0).getOrigin()))){
+            return false;
+        }
+        for (int i=0;i<this.getArcs().size()-1;i++){
+            if (!(this.getArcs().get(i).getDestination().equals(this.getArcs().get(i+1).getOrigin()))){
+                return false;
             }
         }
-        if (Test_ARC){
-            return true;
-        }
+        return true;
+
         // TODO:
-        return false;
     }
 
     /**
@@ -213,7 +213,11 @@ public class Path {
      */
     public float getLength() {
         // TODO:
-        return (float)getOrigin().getPoint().distanceTo(getDestination().getPoint());
+        float result=0;
+        for (int i=0;i<this.getArcs().size();i++){
+            result = result + (float) (this.getArcs().get(i).getLength());
+        }
+        return result;
     }
 
     /**
@@ -226,7 +230,7 @@ public class Path {
      */
     public double getTravelTime(double speed) {
         // TODO:
-        return getLength() * 3600.0 / (speed * 1000.0);
+        return (double) (getLength() * 3600.0 / (speed * 1000.0));
     }
 
     /**
@@ -238,11 +242,14 @@ public class Path {
      */
     public double getMinimumTravelTime() {
         // TODO:
-        double result= 0;
-        for (int i=0;i<size();i++){
-            result = result + getTravelTime(getArcs().get(i).getRoadInformation().getMaximumSpeed());;
+        /*
+        return getTravelTime(getArcs().get(0).getRoadInformation().getMaximumSpeed());
+        */
+        
+        double Result=0;
+        for (int i=0;i<this.getArcs().size();i++){
+            Result=Result+ this.getArcs().get(i).getMinimumTravelTime();
         }
-        return result;
+        return Result;
     }
-
 }
