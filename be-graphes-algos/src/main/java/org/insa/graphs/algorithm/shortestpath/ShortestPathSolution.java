@@ -9,6 +9,7 @@ public class ShortestPathSolution extends AbstractSolution {
 
     // Optimal solution.
     private final Path path;
+    private double coutfinal;
 
     /**
      * Create a new infeasible shortest-path solution for the given input and status.
@@ -19,6 +20,12 @@ public class ShortestPathSolution extends AbstractSolution {
     public ShortestPathSolution(ShortestPathData data, Status status) {
         super(data, status);
         this.path = null;
+    }
+
+    public ShortestPathSolution(ShortestPathData data, Status status, Path path, double coutfinal) {
+        super(data, status);
+        this.path = path;
+        this.coutfinal=coutfinal;
     }
 
     /**
@@ -70,6 +77,11 @@ public class ShortestPathSolution extends AbstractSolution {
         }
         info += " in " + getSolvingTime().getSeconds() + " seconds.";
         return info;
+    }
+
+    // J'ajoute getCost pour pouvoir comparer le coût de Dijkstra et Path
+    public double getCost(){
+        return this.coutfinal;
     }
 
 }

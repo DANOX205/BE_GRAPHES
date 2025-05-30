@@ -1,10 +1,14 @@
 package org.insa.graphs.algorithm.utils;
 
+import java.util.ArrayList;
+
 /**
  * Interface representing a basic priority queue. Implementation should enforce the
  * required complexity of each method.
  */
 public interface PriorityQueue<E extends Comparable<E>> {
+
+
 
     /**
      * Check if the priority queue is empty.

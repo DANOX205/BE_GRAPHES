@@ -35,6 +35,11 @@ public class BinaryHeap<E extends Comparable<E>> implements PriorityQueue<E> {
         this.array = new ArrayList<E>(heap.array);
     }
 
+    // Getter pour array
+    public ArrayList<E> getArray(){
+        return this.array;
+    }
+
     /**
      * Set an element at the given index.
      *
@@ -148,7 +153,7 @@ public class BinaryHeap<E extends Comparable<E>> implements PriorityQueue<E> {
             //this.array.remove(index); NE PAS UTILISER REMOVE
         } else {
             // On remplace l'élément d'index index avec le dernier élément du Tas
-            arraySet(index, this.array.get(this.currentSize));
+            arraySet(index, this.array.get(this.currentSize-1));
             this.currentSize=this.currentSize-1;
             //this.array.remove(this.currentSize+1); NE PAS UTILISER REMOVE
             // Maintenant, on veut vérifier que la valeur est au bon endroit.
