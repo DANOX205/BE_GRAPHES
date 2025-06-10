@@ -39,7 +39,12 @@ public class AStarAlgorithm extends DijkstraAlgorithm {
 
         //Initialisation
         for (int i=0;i<nbNodes;i++){
-            double estimation = Point.distance(graph.getNodes().get(i).getPoint(),data.getDestination().getPoint());
+            double estimation = Point.distance(graph.getNodes().get(i).getPoint(),data.getDestination().getPoint())/data.getMaximumSpeed();
+            /* 
+            Arc 
+            */
+            // double estimation = Path.getMinimumTravelTime()
+
             if (data.getOrigin().equals(graph.getNodes().get(i))){ 
                 LabelStar LabelNode = new LabelStar(graph.getNodes().get(i),true,0,null, estimation); // Faire L'estimation 
                 LabelListe[i]= LabelNode; 
